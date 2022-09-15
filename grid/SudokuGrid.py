@@ -1,6 +1,5 @@
-from mailbox import NoSuchMailboxError
 import math
-import SudokuCell
+import CellToFill
 
 
 class SudokuGrid:
@@ -28,7 +27,6 @@ class SudokuGrid:
                         ][rowColumnSplit[1]] = int(dataSplit[1])
 
     # generate empty cells
-
     def generateEmptyCells(self):
         self.emptyCells = []
         self.numberOfBlocks = math.sqrt(self.sudokuSize)
@@ -39,11 +37,10 @@ class SudokuGrid:
                     for column in self.numberOfBlocks:
                         gridColumn = column+blockColumn*self.numberOfBlocks
                         if (self.sudoku[gridRow][gridColumn] == 0):
-                            self.emptyCells.append(SudokuCell(
+                            self.emptyCells.append(CellToFill(
                                 gridRow, gridColumn, blockRow, blockColumn))
 
     # convert sudoku grid to string
-
     def toString(self):
         columnEndIndex = len(self.sudokuSize) - 1
 

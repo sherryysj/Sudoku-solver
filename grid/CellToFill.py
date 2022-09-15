@@ -1,10 +1,10 @@
-class SudokuCell:
+class CellToFill:
     def __init__(self, row, column, blockRow, blockColumn):
         self.row = row
         self.column = column
         self.blockRow = blockRow
         self.blockColumn = blockColumn
-        self.candidate = {}
+        self.candidate = set()
 
     def getRow(self):
         return self.row
@@ -17,6 +17,9 @@ class SudokuCell:
 
     def getBlockColumn(self):
         return self.blockColumn
+
+    def setCandidate(self, candidate):
+        self.candidate = candidate
 
     def getCandidate(self):
         return self.candidate
