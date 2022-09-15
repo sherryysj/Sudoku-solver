@@ -1,3 +1,8 @@
+from mailbox import NoSuchMailboxError
+import math
+import SudokuCell
+
+
 class SudokuGrid:
     def __init__(self, fileName):
         file = open("../games/"+fileName, "r")
@@ -22,10 +27,23 @@ class SudokuGrid:
             self.sudoku[rowColumnSplit[0]
                         ][rowColumnSplit[1]] = int(dataSplit[1])
 
-    def outputGrid(self, filename):
-        return ""
+    # generate empty cells
+
+    def generateEmptyCells(self):
+        self.emptyCells = []
+        self.numberOfBlocks = math.sqrt(self.sudokuSize)
+        for blockRow in self.numberOfBlocks:
+            for blockColumn in self.numberOfBlocks:
+                for row in self.numberOfBlocks:
+                    gridRow = row+blockRow*self.numberOfBlocks
+                    for column in self.numberOfBlocks:
+                        gridColumn = column+blockColumn*self.numberOfBlocks
+                        if (self.sudoku[gridRow][gridColumn] == 0):
+                            self.emptyCells.append(SudokuCell(
+                                gridRow, gridColumn, blockRow, blockColumn))
 
     # convert sudoku grid to string
+
     def toString(self):
         columnEndIndex = len(self.sudokuSize) - 1
 
@@ -40,4 +58,7 @@ class SudokuGrid:
         return sudokuString
 
     def validate(self):
+        return ""
+
+    def outputGrid(self, filename):
         return ""
