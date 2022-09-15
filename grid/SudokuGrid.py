@@ -14,10 +14,10 @@ class SudokuGrid:
         self.sudoku = [[0]*self.gridSize]*self.gridSize
 
         # save valid symbols
-        validSymbols = set()
+        self.validSymbols = set()
         symbolsSplit = data[1].split()
         for symbol in symbolsSplit:
-            validSymbols.add(int(symbol))
+            self.validSymbols.add(int(symbol))
 
         # fill cells according to file input
         for i in (2, len(data)):
@@ -25,6 +25,11 @@ class SudokuGrid:
             rowColumnSplit = dataSplit[0].split(",")
             self.sudoku[rowColumnSplit[0]
                         ][rowColumnSplit[1]] = int(dataSplit[1])
+
+        # prepare empty cells
+        self.generateEmptyCells()
+
+    def
 
     # generate empty cells
     def generateEmptyCells(self):
@@ -41,6 +46,7 @@ class SudokuGrid:
                                 gridRow, gridColumn, blockRow, blockColumn))
 
     # convert sudoku grid to string
+
     def toString(self):
         columnEndIndex = len(self.sudokuSize) - 1
 
@@ -59,3 +65,16 @@ class SudokuGrid:
 
     def outputGrid(self, filename):
         return ""
+
+    # getters
+    def getEmptyCells(self):
+        return self.emptyCells
+
+    def getSudoku(self):
+        return self.sudoku
+
+    def getValidSymbols(self):
+        return self.validSymbols
+
+    def getGridSize(self):
+        return self.gridSize
