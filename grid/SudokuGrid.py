@@ -24,6 +24,17 @@ class SudokuGrid:
 
     def outputGrid(filename):
 
-    def toString():
+    def toString(self):
+        columnEndIndex = len(self.sudokuSize) - 1
+
+        sudokuString = ""
+        for row in self.sudoku:
+            for column in row:
+                sudokuString += self.sudoku[row, column]
+                if (column < columnEndIndex):
+                    sudokuString += " "
+            sudokuString += "\n"
+
+        return sudokuString
 
     def validate():
