@@ -22,8 +22,10 @@ class SudokuGrid:
             self.sudoku[rowColumnSplit[0]
                         ][rowColumnSplit[1]] = int(dataSplit[1])
 
-    def outputGrid(filename):
+    def outputGrid(self, filename):
+        return ""
 
+    # convert sudoku grid to string
     def toString(self):
         columnEndIndex = len(self.sudokuSize) - 1
 
@@ -37,4 +39,5 @@ class SudokuGrid:
 
         return sudokuString
 
-    def validate():
+    def validate(self):
+        return ""
