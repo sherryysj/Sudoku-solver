@@ -11,6 +11,7 @@ class SudokuGrid:
 
         # create empty sudoku grid
         self.gridSize = int(data[0])
+        self.numberOfBlocks = math.sqrt(self.gridSize)
         self.sudoku = [[0]*self.gridSize]*self.gridSize
 
         # save valid symbols
@@ -29,12 +30,48 @@ class SudokuGrid:
         # prepare empty cells
         self.generateEmptyCells()
 
-    def
+    def findCandidates(self, cellToFill):
+        row = cellToFill.getRow()
+        column = cellToFill.getColumn()
+        blockRow = cellToFill.getBlockRow()
+        blockColumn = cellToFill.getBlockColumn()
+
+        # remove used symbol in the same row
+        symbolsInRow = set(self.sudoku[row])
+        symbolsInRow.remove(0)
+        candidatesClearRow = self.validSymbols.difference(symbolsInRow)
+
+        # remove used symbol in the same column
+        symbolsInColumn = set()
+        for rowNumber in self.gridSize:
+            if (self.sudoku[rowNumber][column] != 0):
+                symbolsInColumn.add(self.sudoku[rowNumber][column])
+        candidatesClearRowAndColumn = candidatesClearRow.difference(
+            symbolsInColumn)
+
+        # remove used symbol in the same block
+        symbolsInBlock = set()
+        for blockRow in self.numberOfBlocks:
+            for blockColumn in self.numberOfBlocks:
+                for row in self.numberOfBlocks:
+                    gridRow = row+blockRow*self.numberOfBlocks
+                    for column in self.numberOfBlocks:
+                        gridColumn = column+blockColumn*self.numberOfBlocks
+                        if (self.sudoku[gridRow][gridColumn] != 0):
+                            symbolsInBlock.add(
+                                self.sudoku[gridRow][gridColumn])
+        candidates = candidatesClearRowAndColumn.difference(symbolsInBlock)
+
+        # save candidates in cell
+        if (len(candidates) != 0):
+            cellToFill.setCandidates(candidates)
+            return True
+        else:
+            return False
 
     # generate empty cells
     def generateEmptyCells(self):
         self.emptyCells = []
-        self.numberOfBlocks = math.sqrt(self.sudokuSize)
         for blockRow in self.numberOfBlocks:
             for blockColumn in self.numberOfBlocks:
                 for row in self.numberOfBlocks:
